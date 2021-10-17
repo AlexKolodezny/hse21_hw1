@@ -1,6 +1,6 @@
 # hse21_hw1
 ## Домашняя работа 1 по майнору Биоинформатика
-Ход работы
+### Сборка генома
 1. Создание ссылок в папке hw1
     ```
     /usr/share/data-minor-bioinf/assembly | xargs -I % -t ln -s /usr/share/data-minor-bioinf/assembly/%
@@ -49,3 +49,16 @@
     ```
 11. Опять находим наидлиннейшую подпоследовательность
 
+### Картинки из multiqc
+Без обрезания адаптеров
+![multiqc](/images/report_1.png)
+![multiqc](/images/report_2.png)
+![multiqc](/images/report_3.png)
+С обрезанием адаптеров
+![multiqc for trimmed](/images/report_trimmed_1.png)
+![multiqc for trimmed](/images/report_trimmed_2.png)
+![multiqc for trimmed](/images/report_trimmed_3.png)
+Полный отчёт находится в файлах __multiqc_report.html__ и __multiqc_report_trimmed.html__.
+
+### Анализ последовательностей
+Анализ собранных последовательностей находится в ноутбуке в папке src.
