@@ -18,5 +18,34 @@
     ```
 4. Объединяем с multiqc
     ```
+    multiqc -o multiqc fastqc
+    ```
+5. Подрезаем адаптеры
+    ```
+    platanus_trim paired_end_1.fastq paired_end_2.fastq
+    platanus_internal_trim mate_pairs_1.fastq mate_pairs_2.fastq
+    ```
+6. Собираем анализ
+    ```
+    ls *.trimmed | xargs -t -I % fastqc -o fastqc %
     multiqc -o muliqc fastqc
     ```
+7. Собираем контиги
+    ```
+    platanus assemble -o Poil -t 1 -m 10 -f *.trimmed 2>assemble.log
+    ```
+8. Объединяем контиги
+    ```
+    platanus scaffold -o Poil -t 1 -c Poil_contig.fa -IP1 *.trimmed -OP2 *.int_trimmed 2>scaffold.log
+    ```
+9. Находим наидленнейшую последовательность
+    ```
+    echo scaffold1_len3834874_cov232 > tmp.txt
+    seqtk subseq Poil_scaffold.fa tmp.txt >longest_with_gaps.fasta
+    ```
+10. Закрываем пропуски
+    ```
+    platanus gap_close -o Poil -t 1 -c Poil_scaffold.fa -IP1 *.trimmed -OP2 *.int_trimmed 2>gapclose.log
+    ```
+11. Опять находим наидлиннейшую подпоследовательность
+
